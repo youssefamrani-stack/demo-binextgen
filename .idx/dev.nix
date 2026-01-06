@@ -30,7 +30,6 @@
 
     workspace = {
       onCreate = {
-        # ✅ AJOUT: installe les dépendances dès la création du workspace
         installDeps = "npm ci || npm install";
 
         default.openFiles = [
@@ -38,9 +37,8 @@
         ];
       };
 
-      # ✅ AJOUT (optionnel mais utile): réassure l’installation au démarrage
       onStart = {
-        installDeps = "npm ci || npm install";
+        installDeps = "test -x node_modules/.bin/next || (npm ci || npm install)";
       };
     };
 
@@ -49,11 +47,10 @@
       enable = true;
       previews = {
         web = {
-          # ✅ AJOUT: garantit que next est dispo AVANT le dev server
           command = [
             "bash"
             "-lc"
-            "npm ci || npm install; npm run dev -- --port $PORT --hostname 0.0.0.0"
+            "test -x node_modules/.bin/next || (npm ci || npm install); npm run dev -- --port $PORT --hostname 0.0.0.0"
           ];
           manager = "web";
         };
