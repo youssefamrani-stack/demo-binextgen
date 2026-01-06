@@ -20,7 +20,6 @@
         ];
       };
 
-      # ✅ AJOUT : installe les deps au démarrage du workspace (sans toucher au reste)
       onStart = {
         installDeps = "npm ci || npm install";
       };
